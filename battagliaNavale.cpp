@@ -277,14 +277,20 @@ bool turnoPC(char matriceNascosta[][DIMENSIONE], char matriceVisibile[][DIMENSIO
     cin >> coordY;
     */
     Sleep(1000);
-    int tentativi=1;
-    while ((matriceVisibile[coordY][coordX] != VUOTO) and (tentativi < 1000)) // SE IL PUNTO E' GIA' STATO BOMBARDATO
-    {
-        int coordX = rand() % 10;
-        int coordY = rand() % 10;
-        tentativi++;
-    }
+    int tentativi = 1;
     char indiceNumero = ((char)coordX + 65);
+    cout << "Tentativo numero: " << tentativi << "     Coordinate:  " << indiceNumero << " " << coordY+1 << endl;
+    system("pause");
+    while (((matriceVisibile[coordY][coordX] == 'X') or (matriceVisibile[coordY][coordX] == 'O') or (matriceVisibile[coordY][coordX] == 'c') or (matriceVisibile[coordY][coordX] == 'i') or (matriceVisibile[coordY][coordX] == 's')) and (tentativi < 1000)) // SE IL PUNTO E' GIA' STATO BOMBARDATO
+    {
+        coordX = rand() % 10;
+        coordY = rand() % 10;
+        tentativi++;
+        indiceNumero = ((char)coordX + 65);
+        cout << "Tentativo numero: " << tentativi << "     Coordinate:  " << indiceNumero << " " << coordY + 1 << endl;
+        system("pause");
+    }
+    indiceNumero = ((char)coordX + 65);
     stampaConDelay("Il computer si prepara a colpire in ");
     cout << indiceNumero << " " << coordY + 1;
     stampaConDelay("...\n");
