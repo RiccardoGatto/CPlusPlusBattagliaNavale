@@ -6,9 +6,25 @@
 #include <string>
 
 using namespace std;
+
 const int DIMENSIONE = 10;
 const char VUOTO = ' ';
 const int NUMERONAVI = 7;
+
+/*
+LEGENDA:
+
+LETTERA 'X': NAVE COLPITA
+LETTERA 'O': BERSAGLIO MANCATO
+LETTERA 'c': SIMBOLO DELLA NAVE CORAZZATA
+LETTERA 'i': SIMBOLO DELLA NAVE INCROCIATORE
+LETTERA 's': SIMBOLO DELLA NAVE SOTTOMARINO
+NUMERI DA 0 A 6: IDENTIFICANO LE NAVI SULLA GRIGLIA DI GIOCO (0 E 1 PER LE CORAZZATE, 2 E 3 PER GLI INCROCIATORI, DA 4 A 6 PER I SOTTOMARINI)
+
+OGNI PUNTO DELLA NAVE COLPITA SOSTITUISCE IL SUO NUMERO CORRISPONDENTE CON IL CARATTERE 'X' (ES. '0''0''X''0''0' PER UNA CORAZZATA)
+
+PER OGNI NAVE AFFONDATA VENGONO SOSTITUITI I CARATTERI 'X' CON LE LETTERE IDENTIFICATIVE (ES. DA 'X''X''X' A 'i''i''i' PER UNA CORAZZATA) 
+*/
 
 struct nave
 {
@@ -278,17 +294,14 @@ bool turnoPC(char matriceNascosta[][DIMENSIONE], char matriceVisibile[][DIMENSIO
     */
     Sleep(1000);
     int tentativi = 1;
-    char indiceNumero = ((char)coordX + 65);
-    cout << "Tentativo numero: " << tentativi << "     Coordinate:  " << indiceNumero << " " << coordY+1 << endl;
-    system("pause");
+    char indiceNumero;
+    // cout << "Tentativo numero: " << tentativi << "     Coordinate:  " << indiceNumero << " " << coordY+1 << endl;
     while (((matriceVisibile[coordY][coordX] == 'X') or (matriceVisibile[coordY][coordX] == 'O') or (matriceVisibile[coordY][coordX] == 'c') or (matriceVisibile[coordY][coordX] == 'i') or (matriceVisibile[coordY][coordX] == 's')) and (tentativi < 1000)) // SE IL PUNTO E' GIA' STATO BOMBARDATO
     {
         coordX = rand() % 10;
         coordY = rand() % 10;
         tentativi++;
-        indiceNumero = ((char)coordX + 65);
-        cout << "Tentativo numero: " << tentativi << "     Coordinate:  " << indiceNumero << " " << coordY + 1 << endl;
-        system("pause");
+        // cout << "Tentativo numero: " << tentativi << "     Coordinate:  " << indiceNumero << " " << coordY + 1 << endl;
     }
     indiceNumero = ((char)coordX + 65);
     stampaConDelay("Il computer si prepara a colpire in ");
