@@ -41,6 +41,22 @@ void stampaConDelay(string frase)
     }
 }
 
+void stampaTitolo(void)
+{
+    cout << endl;
+    stampaConDelay(" ========================================================  \n");
+    stampaConDelay("| READY TO PLAY...                                       | \n");
+    stampaConDelay("|      _______  _______  ____________     ____      ___  | \n");
+    stampaConDelay("|     /  ____/ / ___  / / __  /__   /    /    |    /   | | \n");
+    stampaConDelay("|    /  /___  / /  / / / /_/ /  /  /    /     |   / /| | | \n");
+    stampaConDelay("|   /  ____/ / /  / / /  _  /  /  /    /  /|  |  / /_| | | \n");
+    stampaConDelay("|  /  /     / /__/ / /  / | | /  /___ /  / |  | /____  | | \n");
+    stampaConDelay("| /__/     /______/ /__/  |_|/______//__/  |__|      |_| | \n");
+    stampaConDelay(" ========================================================  \n");
+    stampaConDelay(" Create by... Serge, Marco, Jacopo    rubato da: Riccardo  \n");
+    cout << endl;
+}
+
 nave *creaFlotta() // RESTITUISCE UN ARRAY CON LE NAVI CHE COMPONGONO LE DUE FLOTTE (2 DA CINQUE, 2 DA TRE E 3 DA DUE)
 {
     nave *navi = new nave[NUMERONAVI];
@@ -419,6 +435,7 @@ bool finePartita(char matrice[][DIMENSIONE]) // RESTITUISCE TRUE SE LA PARTITA E
 
 int main()
 {
+    stampaTitolo();
     bool turno = true;                                     // GESTISCE IL TURNO
     string giocatore = "Riccardo";                         // IMPOSTA IL NOME DEL GIOCATORE
     nave *flotta = creaFlotta();                           // INIZIALIZZA UN ARRAY DI TIPO NAVE
