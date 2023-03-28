@@ -23,7 +23,7 @@ NUMERI DA 0 A 6: IDENTIFICANO LE NAVI SULLA GRIGLIA DI GIOCO (0 E 1 PER LE CORAZ
 
 OGNI PUNTO DELLA NAVE COLPITA SOSTITUISCE IL SUO NUMERO CORRISPONDENTE CON IL CARATTERE 'X' (ES. '0''0''X''0''0' PER UNA CORAZZATA)
 
-PER OGNI NAVE AFFONDATA VENGONO SOSTITUITI I CARATTERI 'X' CON LE LETTERE IDENTIFICATIVE (ES. DA 'X''X''X' A 'i''i''i' PER UNA CORAZZATA) 
+PER OGNI NAVE AFFONDATA VENGONO SOSTITUITI I CARATTERI 'X' CON LE LETTERE IDENTIFICATIVE (ES. DA 'X''X''X' A 'i''i''i' PER UNA CORAZZATA)
 */
 
 struct nave
@@ -39,22 +39,6 @@ void stampaConDelay(string frase)
         cout << frase[i];
         Sleep(15);
     }
-}
-
-void stampaTitolo(void)
-{
-    cout << endl;
-    stampaConDelay(" ========================================================  \n");
-    stampaConDelay("| READY TO PLAY...                                       | \n");
-    stampaConDelay("|      _______  _______  ____________     ____      ___  | \n");
-    stampaConDelay("|     /  ____/ / ___  / / __  /__   /    /    |    /   | | \n");
-    stampaConDelay("|    /  /___  / /  / / / /_/ /  /  /    /     |   / /| | | \n");
-    stampaConDelay("|   /  ____/ / /  / / /  _  /  /  /    /  /|  |  / /_| | | \n");
-    stampaConDelay("|  /  /     / /__/ / /  / | | /  /___ /  / |  | /____  | | \n");
-    stampaConDelay("| /__/     /______/ /__/  |_|/______//__/  |__|      |_| | \n");
-    stampaConDelay(" ========================================================  \n");
-    stampaConDelay(" Create by... Serge, Marco, Jacopo    rubato da: Riccardo  \n");
-    cout << endl;
 }
 
 nave *creaFlotta() // RESTITUISCE UN ARRAY CON LE NAVI CHE COMPONGONO LE DUE FLOTTE (2 DA CINQUE, 2 DA TRE E 3 DA DUE)
@@ -160,12 +144,60 @@ void stampaConsole(char matriceGiocatore[][DIMENSIONE], char matricePC[][DIMENSI
         cout << i + 1 << ((i < 9) ? "  |" : " |");
         for (int j = 0; j < DIMENSIONE; j++)
         {
-            cout << " " << matriceGiocatore[i][j] << " ";
+            if (matriceGiocatore[i][j] != VUOTO)
+            {
+                if (matriceGiocatore[i][j] == 'X')
+                {
+                    cout << "\033[31m";
+                    cout << " " << matriceGiocatore[i][j] << " ";
+                    cout << "\033[37m";
+                }
+                else if (matriceGiocatore[i][j] == 'O')
+                {
+                    cout << "\033[36m";
+                    cout << " " << matriceGiocatore[i][j] << " ";
+                    cout << "\033[37m";
+                }
+                else
+                {
+                    cout << "\033[32m";
+                    cout << " " << matriceGiocatore[i][j] << " ";
+                    cout << "\033[37m";
+                }
+            }
+            else
+            {
+                cout << " " << matriceGiocatore[i][j] << " ";
+            }
         }
         cout << "     " << i + 1 << ((i < 9) ? "  |" : " |");
         for (int j = 0; j < DIMENSIONE; j++)
         {
-            cout << " " << matricePC[i][j] << " ";
+            if (matricePC[i][j] != VUOTO)
+            {
+                if (matricePC[i][j] == 'X')
+                {
+                    cout << "\033[31m";
+                    cout << " " << matricePC[i][j] << " ";
+                    cout << "\033[37m";
+                }
+                else if (matricePC[i][j] == 'O')
+                {
+                    cout << "\033[36m";
+                    cout << " " << matricePC[i][j] << " ";
+                    cout << "\033[37m";
+                }
+                else
+                {
+                    cout << "\033[32m";
+                    cout << " " << matricePC[i][j] << " ";
+                    cout << "\033[37m";
+                }
+            }
+            else
+            {
+                cout << " " << matricePC[i][j] << " ";
+            }
         }
         cout << endl;
     }
@@ -435,7 +467,6 @@ bool finePartita(char matrice[][DIMENSIONE]) // RESTITUISCE TRUE SE LA PARTITA E
 
 int main()
 {
-    stampaTitolo();
     bool turno = true;                                     // GESTISCE IL TURNO
     string giocatore = "Riccardo";                         // IMPOSTA IL NOME DEL GIOCATORE
     nave *flotta = creaFlotta();                           // INIZIALIZZA UN ARRAY DI TIPO NAVE
