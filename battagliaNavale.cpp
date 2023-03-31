@@ -158,6 +158,12 @@ void stampaConsole(char matriceGiocatore[][DIMENSIONE], char matricePC[][DIMENSI
                     cout << " " << matriceGiocatore[i][j] << " ";
                     cout << "\033[37m";
                 }
+                else if (matriceGiocatore[i][j] == 'i' or matriceGiocatore[i][j] == 's' or matriceGiocatore[i][j] == 'c')
+                {
+                    cout << "\033[33m";
+                    cout << " " << matriceGiocatore[i][j] << " ";
+                    cout << "\033[37m";
+                }
                 else
                 {
                     cout << "\033[32m";
@@ -184,6 +190,12 @@ void stampaConsole(char matriceGiocatore[][DIMENSIONE], char matricePC[][DIMENSI
                 else if (matricePC[i][j] == 'O')
                 {
                     cout << "\033[36m";
+                    cout << " " << matricePC[i][j] << " ";
+                    cout << "\033[37m";
+                }
+                else if (matricePC[i][j] == 'i' or matricePC[i][j] == 's' or matricePC[i][j] == 'c')
+                {
+                    cout << "\033[33m";
                     cout << " " << matricePC[i][j] << " ";
                     cout << "\033[37m";
                 }
