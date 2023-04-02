@@ -477,7 +477,7 @@ bool finePartita(char matrice[][DIMENSIONE]) // RESTITUISCE TRUE SE LA PARTITA E
     return (count == 22); // TRUE SE I COLPI ANDATI A BUON FINE SONO 22, FALSE ALTRIMENTI
 }
 
-int main()
+void gioca()
 {
     bool turno = true;                                     // GESTISCE IL TURNO
     string giocatore = "Riccardo";                         // IMPOSTA IL NOME DEL GIOCATORE
@@ -530,17 +530,21 @@ int main()
             Sleep(1500);
             while (turnoGiocatore(grigliaPCNascosta, grigliaPCVisibile) and (!finePartita(grigliaPCVisibile))) // TURNO DEL GIOCATORE, TERMINA SE E' FINITA LA PARTITA OPPURE LA MOSSA NON HA CENTRATO BERSAGLI
             {
-                // checkBersagli restituisce un array che per ogni nave indichi quante volte e' stata colpita.
+                // checkBersagli restituisce un array che per ogni nave indica quante volte e' stata colpita.
                 // isColpitoEAffondato riporta il numero della nave che è stata affondata
                 affondato = isColpitoEAffondato(checkBersagli(grigliaPCNascosta, grigliaPCVisibile));
                 if (affondato != -1) // SE UNA NAVE E' STATA AFFONDATA
                 {
                     mostraNaveAbbattuta(grigliaPCNascosta, grigliaPCVisibile, affondato); // SOSTITUISCE LE 'X' CON IL NUMERO INDICATIVO DELLA NAVE STESSA
+                    cout << "\033[33m";
                     stampaConDelay("Colpito e affondato!\n");
+                    cout << "\033[37m";
                 }
                 else
                 {
+                    cout << "\033[31m";
                     stampaConDelay("Colpito!\n");
+                    cout << "\033[37m";
                 }
                 stampaConsole(grigliaGiocatoreVisibile, grigliaPCVisibile);
             }
@@ -559,11 +563,15 @@ int main()
                 if (affondato != -1) // SE UNA NAVE E' STATA AFFONDATA
                 {
                     mostraNaveAbbattuta(grigliaGiocatoreNascosta, grigliaGiocatoreVisibile, affondato); // SOSTITUISCE LE 'X' CON IL NUMERO INDICATIVO DELLA NAVE STESSA
+                    cout << "\033[33m";
                     stampaConDelay("Ti hanno colpito e affondato una nave...\n");
+                    cout << "\033[37m";
                 }
                 else
                 {
+                    cout << "\033[31m";
                     stampaConDelay("Sei stato colpito...\n");
+                    cout << "\033[37m";
                 }
                 stampaConsole(grigliaGiocatoreVisibile, grigliaPCVisibile);
             }
@@ -571,14 +579,15 @@ int main()
             turno = !turno; // PASSA IL TURNO AL GIOCATORE
         }
     }
-
-    if (finePartita(grigliaPCVisibile)) // SE LA PARTITA E' STATA VINTA DAL GIOCATORE
+    if (!turno) // SE LA PARTITA E' STATA VINTA DAL GIOCATORE
     {
         affondato = isColpitoEAffondato(checkBersagli(grigliaPCNascosta, grigliaPCVisibile));
         mostraNaveAbbattuta(grigliaPCNascosta, grigliaPCVisibile, affondato); // MOSTRA TUTTE LE NAVI DEL PC
         stampaConsole(grigliaGiocatoreVisibile, grigliaPCVisibile);
         cout << endl;
+        cout << "\033[36m";
         stampaConDelay("HAI VINTO LA BATTAGLIA!!!");
+        cout << "\033[37m";
         cout << endl;
     }
     else // SE LA PARTITA E' STATA VINTA DAL PC
@@ -587,8 +596,15 @@ int main()
         mostraNaveAbbattuta(grigliaGiocatoreNascosta, grigliaGiocatoreVisibile, affondato); // MOSTRA TUTTE LE NAVI DEL GIOCATORE
         stampaConsole(grigliaGiocatoreVisibile, grigliaPCVisibile);
         cout << endl;
+        cout << "\033[36m";
         stampaConDelay("Peccato... hai perso...");
+        cout << "\033[37m";
         cout << endl;
     }
     system("pause");
+}
+
+int main()
+{
+    gioca();
 }
